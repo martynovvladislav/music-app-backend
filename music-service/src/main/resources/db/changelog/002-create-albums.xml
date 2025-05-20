@@ -1,0 +1,28 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <changeSet id="002-create-albums" author="martynov">
+        <createTable tableName="album">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="artist_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_album_artist" references="artist(id)"/>
+            </column>
+            <column name="release_date" type="DATE"/>
+            <column name="cover_url" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex indexName="idx_album_artist" tableName="album">
+            <column name="artist_id"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

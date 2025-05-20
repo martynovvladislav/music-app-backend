@@ -1,0 +1,49 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+      http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="create-friendship-table" author="martynov">
+        <createTable tableName="friendship">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="requestor_user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="receiver_user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="requested_at" type="TIMESTAMP"/>
+            <column name="accepted_at" type="TIMESTAMP"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="friendship"
+                baseColumnNames="requestor_user_id"
+                constraintName="fk_friendship_requestor"
+                referencedTableName="customer"
+                referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                baseTableName="friendship"
+                baseColumnNames="receiver_user_id"
+                constraintName="fk_friendship_receiver"
+                referencedTableName="customer"
+                referencedColumnNames="id"/>
+
+        <addUniqueConstraint
+                tableName="friendship"
+                columnNames="requestor_user_id, receiver_user_id"
+                constraintName="uk_friendship_requestor_receiver"/>
+    </changeSet>
+</databaseChangeLog>

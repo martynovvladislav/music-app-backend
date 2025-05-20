@@ -1,0 +1,14 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <include file="db/changelog/001-create-user.xml"/>
+    <include file="db/changelog/002-create-friendship.xml"/>
+    <include file="db/changelog/003-create-like.xml"/>
+    <include file="db/changelog/004-rename-like.xml"/>
+    <include file="db/changelog/005-create-chatmessage.xml"/>
+    <include file="db/changelog/006-alter-chatmessage-add-album.xml"/>
+
+</databaseChangeLog>
